@@ -8,11 +8,30 @@ use App\Models\User;
 
 class AccountController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('admin.accounts.index', compact('users'));
+        $query = User::orderBy('created_at', 'desc'); // Sắp xếp theo thời gian mới đến cũ
+    
+        $search = $request->input('search');
+        $role = $request->input('role');
+    
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                      ->orWhere('email', 'like', "%$search%");
+            });
+        }
+    
+        if ($role) {
+            $query->where('role', $role);
+        }
+    
+        $users = $query->paginate(5);
+    
+        return view('admin.accounts.index', compact('users', 'search', 'role'));
     }
+    
 
 
     public function create()
@@ -29,7 +48,8 @@ class AccountController extends Controller
             'role' => 'required',
         ]);
 
-        $data['password'] = Hash::make($data['password']);
+        $data['password'] = bcrypt($data['password']);
+
 
         User::create($data);
 
@@ -42,18 +62,31 @@ class AccountController extends Controller
         return view('admin.accounts.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+        public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'role' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password' => 'nullable|string|min:8', // Password không bắt buộc nhập
+            'role' => 'required|string|in:student,teacher,admin',
         ]);
 
-        User::where('id', $id)->update($data);
+        $user->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'role' => $data['role'],
+        ]);
 
-        return redirect()->route('admin.accounts.index')->with('success', 'User updated successfully');
+        if ($data['password']) {
+            $data['password'] = bcrypt($data['password']); // Cập nhật password nếu có
+            $user->save();
+        }
+
+        return redirect()->route('admin.accounts.index')->with('success', 'Account updated successfully.');
     }
+
 
     public function destroy($id)
     {

@@ -148,6 +148,7 @@
             <p class="menu-name">Admin DashBoard</p>
                     <ul>
                         <li><a href="{{ route('admin.accounts.index') }}">Views Account</a></li>
+                        <li><a href="{{ route('admin.accounts.create') }}">Create Account</a></li>
                     </ul>
             <ul>
                 <li class="active">
@@ -206,61 +207,83 @@
 				  
     </div>
 
-        <div class="top-bar">
+    <div class="top-bar">
             <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-
-
-                                               
-        <div class="main-content">
-    <div class="container">
-        <h2>User List</h2>
-        <a href="{{ route('admin.accounts.create') }}" class="btn btn-success mb-2">Add User</a>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Role</th>
-                    <th>Created_at</th>
-                    <th>Updated_at</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->password }}</td>
-                        <td>{{ $user->role }}</td>
-                        <td>{{ $user->created_at }}</td>
-                        <td>{{ $user->updated_at }}</td>
-                        <td>
-                            <a href="{{ route('admin.accounts.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="{{ route('admin.accounts.destroy', $user->id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+            <div class="container">
+                <h2>User List</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form action="{{ route('admin.accounts.index') }}" method="GET" class="form-inline">
+                                <div class="form-group">
+                                    <input type="text" name="search" class="form-control" placeholder="Search by name or email" value="{{ $search }}">
+                                </div>
+                                <div class="form-group">
+                                    <select name="role" class="form-control">
+                                        <option value="">All Roles</option>
+                                        <option value="admin"{{ $role == 'admin' ? ' selected' : '' }}>Admin</option>
+                                        <option value="teacher"{{ $role == 'teacher' ? ' selected' : '' }}>Teacher</option>
+                                        <option value="student"{{ $role == 'student' ? ' selected' : '' }}>Student</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Search</button>
                             </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{{ route('admin.accounts.create') }}" class="btn btn-success mb-2">Add User</a>
+                        </div>
+                    </div>
 
-                                     
+                    @if ($users->isEmpty())
+                        <p>No users found.</p>
+                    @else
+                        <table class="table">
+                            <!-- ... -->
+                        </table>
+                        {{ $users->links() }}
+                    @endif
 
 
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                            <th>Created_at</th>
+                            <th>Updated_at</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->password }}</td>
+                                <td>{{ $user->role }}</td>
+                                <td>{{ $user->created_at }}</td>
+                                <td>{{ $user->updated_at }}</td>
+                                <td>
+                                    <a href="{{ route('admin.accounts.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <form action="{{ route('admin.accounts.destroy', $user->id) }}" method="POST" style="display: inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
         </div>
-
-
+    </div>
 
     <footer>
         <p style="margin-right: 240px;">© 2023 Your Website. All rights reserved.</p>
