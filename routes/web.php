@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\AccountController;
 
 Route::get('/', function () {
     return view('home');
@@ -18,6 +19,8 @@ Route::post('/register', [AuthController::class, 'register']);
 
 // Đăng xuất
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
 
 // Route cho người dùng đã đăng nhập
 Route::middleware(['auth'])->group(function () {
@@ -39,3 +42,8 @@ Route::middleware(['auth'])->group(function () {
         return view('Admin.main');
     })->name('admin.main');
 });
+
+
+
+
+    Route::get('/admin/accounts', [AccountController::class, 'index'])->name('admin.accounts.index');

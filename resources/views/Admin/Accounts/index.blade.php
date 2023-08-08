@@ -210,9 +210,41 @@
             <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-                    <a href="#">
-                        <img src="https://btec.fpt.edu.vn/wp-content/uploads/2022/07/LogoBTEC-1536x1268.png" alt="Logo">
-                    </a>
+
+
+                                               
+                                                <div class="container">
+                                                    <h2>User List</h2>
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Name</th>
+                                                                <th>Email</th>
+                                                                <th>Password</th>
+                                                                <th>Role</th>
+                                                                <th>Created_at</th>
+                                                                <th>Updated_at</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($users as $user)
+                                                                <tr>
+                                                                    <td>{{ $user->id }}</td>
+                                                                    <td>{{ $user->name }}</td>
+                                                                    <td>{{ $user->email }}</td>
+                                                                    <td>{{ $user->password }}</td>
+                                                                    <td>{{ $user->role }}</td>
+                                                                    <td>{{ $user->created_at }}</td>
+                                                                    <td>{{ $user->updated_at }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                     
+
+
         </div>
 
 
@@ -223,3 +255,7 @@
 
 </body>
 </html>
+
+
+
+
