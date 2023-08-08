@@ -18,7 +18,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return $this->redirectBasedOnRole(auth()->user()->role);
+            return redirect()->intended('/');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials']);
@@ -35,30 +35,15 @@ class AuthController extends Controller
             'display_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:student,teacher,admin',
         ]);
 
         $user = User::create([
             'name' => $request->display_name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role' => $request->role,
         ]);
 
         Auth::login($user);
-
-        return $this->redirectBasedOnRole($request->role);
-    }
-
-    private function redirectBasedOnRole($role)
-    {
-        if ($role === 'student') {
-            return redirect()->route('student.main');
-        } elseif ($role === 'admin') {
-            return redirect()->route('admin.main');
-        } elseif ($role === 'teacher') {
-            return redirect()->route('teacher.main');
-        }
 
         return redirect()->intended('/');
     }
