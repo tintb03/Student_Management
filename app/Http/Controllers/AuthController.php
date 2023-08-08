@@ -13,16 +13,47 @@ class AuthController extends Controller
         return view('home');
     }
 
+
+        
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+        $role = $request->input('role'); // Lấy vai trò từ form đăng nhập
+    
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/');
+            $user = Auth::user();
+    
+            if ($role === 'student' && $user->role !== 'student') {
+                Auth::logout();
+                return back()->withErrors(['login_role' => 'Invalid role selected for student login']);
+            }
+    
+            if ($role === 'teacher' && $user->role !== 'teacher') {
+                Auth::logout();
+                return back()->withErrors(['login_role' => 'Invalid role selected for teacher login']);
+            }
+    
+            if ($role === 'admin' && $user->role !== 'admin') {
+                Auth::logout();
+                return back()->withErrors(['login_role' => 'Invalid role selected for admin login']);
+            }
+    
+            // Chuyển hướng đúng theo vai trò sau khi xác thực thành công
+            if ($role === 'student') {
+                return redirect()->route('student.main');
+            } elseif ($role === 'teacher') {
+                return redirect()->route('teacher.main');
+            } elseif ($role === 'admin') {
+                return redirect()->route('admin.main');
+            }
         }
-
-        return back()->withErrors(['email' => 'Invalid credentials']);
+    
+        return back()->withErrors(['login_role' => 'Invalid credentials']);
     }
+    
+    
+
+
 
     public function showRegisterForm()
     {
