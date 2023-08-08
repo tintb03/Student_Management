@@ -208,6 +208,12 @@
                         <li><a href="{{ route('admin.majors.create') }}">Create Majors</a></li>
                     </ul>
             <ul>
+            <p class="menu-name">Quản Lý Giáo Viên</p>
+                    <ul>
+                        <li><a href="{{ route('admin.teachers.index') }}">View Teacher</a></li>
+                        <li><a href="{{ route('admin.teachers.create') }}">Create Teacher</a></li>
+                    </ul>
+            <ul>
                 <li class="active">
                     <p href="#">Teacher Account Management</a>
                     <ul>
@@ -268,8 +274,8 @@
                 <h1>Welcome to Admin DashBoard !!!!!!! </h1>
             </div>
             <div class="main-content">
-                
-    <h2>Edit Major</h2>
+            <div class="container">           
+                <h2>Edit Major</h2>
 
                 <form action="{{ route('admin.majors.update', $major->id) }}" method="POST">
                     @csrf
@@ -279,6 +285,7 @@
                         <input type="text" name="name" class="form-control" value="{{ $major->name }}" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Major</button>
+                    <a href="{{ route('admin.majors.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
                 </form>
 
             </div>

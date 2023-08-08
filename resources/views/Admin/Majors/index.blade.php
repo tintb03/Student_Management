@@ -208,6 +208,12 @@
                         <li><a href="{{ route('admin.majors.create') }}">Create Majors</a></li>
                     </ul>
             <ul>
+            <p class="menu-name">Quản Lý Giáo Viên</p>
+                    <ul>
+                        <li><a href="{{ route('admin.teachers.index') }}">View Teacher</a></li>
+                        <li><a href="{{ route('admin.teachers.create') }}">Create Teacher</a></li>
+                    </ul>
+            <ul>
                 <li class="active">
                     <p href="#">Teacher Account Management</a>
                     <ul>
@@ -268,20 +274,21 @@
                 <h1>Welcome to Admin DashBoard !!!!!!! </h1>
             </div>
             <div class="main-content">
+            <div class="container">
                 <h2>Manage Majors</h2>
                 <div class="row">
-    <div class="col-md-6">
-        <form action="{{ route('admin.majors.index') }}" method="GET" class="form-inline">
-            <div class="form-group">
-                <input type="text" name="search" class="form-control" placeholder="Search by name" value="{{ request('search') }}">
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-    </div>
-    <div class="col-md-6 text-right">
-        <a href="{{ route('admin.majors.create') }}" class="btn btn-success">Add Major</a>
-    </div>
-</div>
+                    <div class="col-md-6">
+                        <form action="{{ route('admin.majors.index') }}" method="GET" class="form-inline">
+                            <div class="form-group">
+                                <input type="text" name="search" class="form-control" placeholder="Search by name" value="{{ request('search') }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="{{ route('admin.majors.create') }}" class="btn btn-success">Add Major</a>
+                    </div>
+                </div>
 
                 @if ($majors->isEmpty())
                     <p>No majors found.</p>

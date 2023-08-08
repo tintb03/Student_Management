@@ -157,6 +157,7 @@
                         <li><a href="{{ route('admin.majors.create') }}">Create Majors</a></li>
                     </ul>
             <ul>
+
             <p class="menu-name">Quản Lý Giáo Viên</p>
                     <ul>
                         <li><a href="{{ route('admin.teachers.index') }}">View Teacher</a></li>
@@ -220,22 +221,38 @@
     </div>
 
         <div class="top-bar">
-            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+        <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
         <div class="container">
-                <h2>Add New Major</h2>
-
-                        <form action="{{ route('admin.majors.store') }}" method="POST">
+                <h2>Add New Teacher</h2>
+                        <form action="{{ route('admin.teachers.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" class="form-control" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Add Major</button>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_number">Phone Number</label>
+                                <input type="text" name="phone_number" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" name="address" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="qualification">Qualification</label>
+                                <input type="text" name="qualification" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-success">Save</button>
                             <a href="{{ route('admin.majors.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
                         </form>
-            
+                    </div>
+
 
         </div>
 

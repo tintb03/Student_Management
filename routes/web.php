@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\MajorController;
+use App\Http\Controllers\Admin\TeacherController;
 
 Route::get('/', function () {
     return view('home');
@@ -63,6 +64,16 @@ Route::prefix('admin/majors')->group(function () {
     Route::get('/{major}/edit', [MajorController::class, 'edit'])->name('admin.majors.edit');
     Route::put('/{major}', [MajorController::class, 'update'])->name('admin.majors.update');
     Route::delete('/{major}', [MajorController::class, 'destroy'])->name('admin.majors.destroy');
+});
+
+//các route cho quản lý giáo viên:
+Route::prefix('admin/teachers')->group(function () {
+    Route::get('/', [TeacherController::class, 'index'])->name('admin.teachers.index');
+    Route::get('/create', [TeacherController::class, 'create'])->name('admin.teachers.create');
+    Route::post('/', [TeacherController::class, 'store'])->name('admin.teachers.store');
+    Route::get('/{teacher}/edit', [TeacherController::class, 'edit'])->name('admin.teachers.edit');
+    Route::put('/{teacher}', [TeacherController::class, 'update'])->name('admin.teachers.update');
+    Route::delete('/{teacher}', [TeacherController::class, 'destroy'])->name('admin.teachers.destroy');
 });
 
 
