@@ -179,6 +179,13 @@
                         <li><a href="{{ route('admin.accounts.index') }}">Views Account</a></li>
                         <li><a href="{{ route('admin.accounts.create') }}">Create Account</a></li>
                     </ul>
+            <p class="menu-name">Quản Lý Chuyên Ngành</p>
+                    <ul>
+                        <li><a href="{{ route('admin.majors.index') }}">View Majors</a></li>
+                        <li><a href="{{ route('admin.majors.create') }}">Create Majors</a></li>
+                    </ul>
+            <ul>
+
             <ul>
                 <li class="active">
                     <p href="#">Teacher Account Management</a>

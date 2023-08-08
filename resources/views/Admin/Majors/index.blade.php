@@ -13,6 +13,32 @@
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+
+
         ul {
             list-style-type: none;
             padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
@@ -106,6 +132,31 @@
             background-size: cover;
             background-repeat: no-repeat; */
         }
+
+        /* Input group styles */
+.input-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Search input style */
+.input-group .form-control {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Search button style */
+.input-group .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
 
                 /* Đặt kích thước ảnh theo tỷ lệ */
         img {
@@ -213,14 +264,64 @@
 				  
     </div>
 
-        <div class="top-bar">
-            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
-        </div>
-        <div class="main-content">
-                    <a href="#">
-                        <img src="https://btec.fpt.edu.vn/wp-content/uploads/2022/07/LogoBTEC-1536x1268.png" alt="Logo">
-                    </a>
-        </div>
+                <div class="top-bar">
+                <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+            </div>
+            <div class="main-content">
+                <h2>Manage Majors</h2>
+                <div class="row">
+    <div class="col-md-6">
+        <form action="{{ route('admin.majors.index') }}" method="GET" class="form-inline">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="Search by name" value="{{ request('search') }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <div class="col-md-6 text-right">
+        <a href="{{ route('admin.majors.create') }}" class="btn btn-success">Add Major</a>
+    </div>
+</div>
+
+                @if ($majors->isEmpty())
+                    <p>No majors found.</p>
+                @else
+
+                <table class="table" style="margin-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Chuyên Ngành</th>
+                                <th>Created_at</th>
+                                <th>Updated_at</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($majors as $major)
+                                <tr>
+                                    <td>{{ $major->id }}</td>
+                                    <td>{{ $major->name }}</td>
+                                    <td>{{ $major->created_at }}</td>
+                                    <td>{{ $major->updated_at }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="{{ route('admin.majors.edit', $major->id) }}" class="btn btn-primary">Edit</a>
+                                            <form action="{{ route('admin.majors.destroy', $major->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this major?')">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{ $majors->appends(['search' => request('search')])->links() }}
+                @endif
+            </div>
+
 
 
 

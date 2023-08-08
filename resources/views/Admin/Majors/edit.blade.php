@@ -13,6 +13,32 @@
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+
+
         ul {
             list-style-type: none;
             padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
@@ -106,6 +132,31 @@
             background-size: cover;
             background-repeat: no-repeat; */
         }
+
+        /* Input group styles */
+.input-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Search input style */
+.input-group .form-control {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Search button style */
+.input-group .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
 
                 /* Đặt kích thước ảnh theo tỷ lệ */
         img {
@@ -213,14 +264,25 @@
 				  
     </div>
 
-        <div class="top-bar">
-            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
-        </div>
-        <div class="main-content">
-                    <a href="#">
-                        <img src="https://btec.fpt.edu.vn/wp-content/uploads/2022/07/LogoBTEC-1536x1268.png" alt="Logo">
-                    </a>
-        </div>
+                <div class="top-bar">
+                <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+            </div>
+            <div class="main-content">
+                
+    <h2>Edit Major</h2>
+
+                <form action="{{ route('admin.majors.update', $major->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" class="form-control" value="{{ $major->name }}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Major</button>
+                </form>
+
+            </div>
+
 
 
 

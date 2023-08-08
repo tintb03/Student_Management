@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\MajorController;
 
 Route::get('/', function () {
     return view('home');
@@ -53,4 +54,15 @@ Route::post('/admin/accounts', [AccountController::class, 'store'])->name('admin
 Route::get('/admin/accounts/{id}/edit', [AccountController::class, 'edit'])->name('admin.accounts.edit');
 Route::put('/admin/accounts/{id}', [AccountController::class, 'update'])->name('admin.accounts.update');
 Route::delete('/admin/accounts/{id}', [AccountController::class, 'destroy'])->name('admin.accounts.destroy');
+
+//các route cho quản lý chuyên ngành:
+Route::prefix('admin/majors')->group(function () {
+    Route::get('/', [MajorController::class, 'index'])->name('admin.majors.index');
+    Route::get('/create', [MajorController::class, 'create'])->name('admin.majors.create');
+    Route::post('/', [MajorController::class, 'store'])->name('admin.majors.store');
+    Route::get('/{major}/edit', [MajorController::class, 'edit'])->name('admin.majors.edit');
+    Route::put('/{major}', [MajorController::class, 'update'])->name('admin.majors.update');
+    Route::delete('/{major}', [MajorController::class, 'destroy'])->name('admin.majors.destroy');
+});
+
 
