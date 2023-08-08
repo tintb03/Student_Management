@@ -213,35 +213,48 @@
 
 
                                                
-                                                <div class="container">
-                                                    <h2>User List</h2>
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>ID</th>
-                                                                <th>Name</th>
-                                                                <th>Email</th>
-                                                                <th>Password</th>
-                                                                <th>Role</th>
-                                                                <th>Created_at</th>
-                                                                <th>Updated_at</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($users as $user)
-                                                                <tr>
-                                                                    <td>{{ $user->id }}</td>
-                                                                    <td>{{ $user->name }}</td>
-                                                                    <td>{{ $user->email }}</td>
-                                                                    <td>{{ $user->password }}</td>
-                                                                    <td>{{ $user->role }}</td>
-                                                                    <td>{{ $user->created_at }}</td>
-                                                                    <td>{{ $user->updated_at }}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+        <div class="main-content">
+    <div class="container">
+        <h2>User List</h2>
+        <a href="{{ route('admin.accounts.create') }}" class="btn btn-success mb-2">Add User</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Role</th>
+                    <th>Created_at</th>
+                    <th>Updated_at</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->password }}</td>
+                        <td>{{ $user->role }}</td>
+                        <td>{{ $user->created_at }}</td>
+                        <td>{{ $user->updated_at }}</td>
+                        <td>
+                            <a href="{{ route('admin.accounts.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <form action="{{ route('admin.accounts.destroy', $user->id) }}" method="POST" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
                                      
 
 

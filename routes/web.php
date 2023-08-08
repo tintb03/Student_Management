@@ -45,5 +45,12 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-
+//hiển thị acc
     Route::get('/admin/accounts', [AccountController::class, 'index'])->name('admin.accounts.index');
+//thêm sửa xoá acc
+Route::get('/admin/accounts/create', [AccountController::class, 'create'])->name('admin.accounts.create');
+Route::post('/admin/accounts', [AccountController::class, 'store'])->name('admin.accounts.store');
+Route::get('/admin/accounts/{id}/edit', [AccountController::class, 'edit'])->name('admin.accounts.edit');
+Route::put('/admin/accounts/{id}', [AccountController::class, 'update'])->name('admin.accounts.update');
+Route::delete('/admin/accounts/{id}', [AccountController::class, 'destroy'])->name('admin.accounts.destroy');
+
