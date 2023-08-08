@@ -243,8 +243,8 @@
 				    </div>
 
 				    <ul class="nav navbar-nav navbar-right">
-				      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				      <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+                      <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); logoutConfirmation();"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 				    </ul>
 				  </div>
 				</nav>
@@ -319,5 +319,14 @@
     <footer>
         <p>© 2023 Your Website. All rights reserved.</p>
     </footer>
+
+    <script>
+    function logoutConfirmation() {
+        if (confirm('Are you sure you want to log out?')) {
+            window.location.href = "{{ route('logout') }}";
+        }
+    }
+</script>
+
 </body>
 </html>

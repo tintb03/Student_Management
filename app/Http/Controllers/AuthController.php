@@ -53,7 +53,16 @@ class AuthController extends Controller
         return back()->withErrors(['login_role' => 'Invalid credentials']);
     }
     
-    
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/'); // Điều hướng về trang chủ
+    }
 
 
 
