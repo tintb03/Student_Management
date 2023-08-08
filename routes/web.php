@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\MajorController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\ClassroomController;
 
 Route::get('/', function () {
     return view('home');
@@ -86,5 +87,20 @@ Route::prefix('admin/students')->group(function () {
     Route::put('/{student}', [StudentController::class, 'update'])->name('admin.students.update');
     Route::delete('/{student}', [StudentController::class, 'destroy'])->name('admin.students.destroy');
 });
+
+
+//các route cho quản lý lớp học:
+Route::prefix('admin')->group(function () {
+    Route::get('classrooms', [ClassroomController::class, 'index'])->name('admin.classrooms.index');
+    Route::get('admin/classrooms/create', [ClassroomController::class, 'create'])->name('admin.classrooms.create');
+    Route::post('classrooms', [ClassroomController::class, 'store'])->name('admin.classrooms.store');
+    Route::get('classrooms/{classroom}', [ClassroomController::class, 'show'])->name('admin.classrooms.show');
+    Route::get('classrooms/{classroom}/edit', [ClassroomController::class, 'edit'])->name('admin.classrooms.edit');
+    Route::put('classrooms/{classroom}', [ClassroomController::class, 'update'])->name('admin.classrooms.update');
+    Route::delete('classrooms/{classroom}', [ClassroomController::class, 'destroy'])->name('admin.classrooms.destroy');
+});
+
+
+
 
 

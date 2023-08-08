@@ -171,6 +171,13 @@
                             </ul>
                     <ul>
 
+                    <p class="menu-name">Quản Lý Lớp Học</p>
+                            <ul>
+                                <li><a href="{{ route('admin.classrooms.index') }}">View ClassRooms</a></li>
+                                <li><a href="{{ route('admin.classrooms.create') }}">Create ClassRoom</a></li>
+                            </ul>
+                    <ul>
+
                 <!-- <li class="active">
                     <p href="#">Teacher Account Management</a>
                     <ul>

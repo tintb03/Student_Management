@@ -170,12 +170,14 @@
                                 <li><a href="{{ route('admin.students.create') }}">Create Student</a></li>
                             </ul>
                     <ul>
+
                     <p class="menu-name">Quản Lý Lớp Học</p>
                             <ul>
                                 <li><a href="{{ route('admin.classrooms.index') }}">View ClassRooms</a></li>
                                 <li><a href="{{ route('admin.classrooms.create') }}">Create ClassRoom</a></li>
                             </ul>
                     <ul>
+                        
 
                 <!-- <li class="active">
                     <p href="#">Teacher Account Management</a>
@@ -221,11 +223,12 @@
 				<nav class="navbar navbar-inverse">
 				  <div class="container-fluid">
 				    <div class="navbar-header">
-				      <a class="navbar-brand" href="#">Create Teacher</a>
+				      <a class="navbar-brand" href="#">WebSiteName</a>
 				    </div>
 
 				    <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); logoutConfirmation();"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				      <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+				      <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); logoutConfirmation();"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 				    </ul>
 				  </div>
 				</nav>
@@ -233,37 +236,40 @@
     </div>
 
         <div class="top-bar">
-        <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-        <div class="container">
-                <h2>Add New Teacher</h2>
-                        <form action="{{ route('admin.teachers.store') }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input type="text" name="phone_number" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" name="address" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="qualification">Qualification</label>
-                                <input type="text" name="qualification" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-success">Save</button>
-                            <a href="{{ route('admin.teachers.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
-                        </form>
-                    </div>
+
+                        <div class="container">
+                    <h2>Edit Classroom</h2>
+
+                    <form action="{{ route('admin.classrooms.update', $classroom->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $classroom->name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="teacher_id">Teacher:</label>
+                            <select class="form-control" id="teacher_id" name="teacher_id" required>
+                                @foreach ($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}" {{ $classroom->teacher_id == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="major_id">Major:</label>
+                            <select class="form-control" id="major_id" name="major_id" required>
+                                @foreach ($majors as $major)
+                                    <option value="{{ $major->id }}" {{ $classroom->major_id == $major->id ? 'selected' : '' }}>{{ $major->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{ route('admin.classrooms.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
+                    </form>
+                </div>
 
 
         </div>

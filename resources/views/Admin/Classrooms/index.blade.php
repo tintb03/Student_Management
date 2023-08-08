@@ -13,6 +13,31 @@
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+
         ul {
             list-style-type: none;
             padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
@@ -170,12 +195,14 @@
                                 <li><a href="{{ route('admin.students.create') }}">Create Student</a></li>
                             </ul>
                     <ul>
+
                     <p class="menu-name">Quản Lý Lớp Học</p>
                             <ul>
                                 <li><a href="{{ route('admin.classrooms.index') }}">View ClassRooms</a></li>
                                 <li><a href="{{ route('admin.classrooms.create') }}">Create ClassRoom</a></li>
                             </ul>
                     <ul>
+                        
 
                 <!-- <li class="active">
                     <p href="#">Teacher Account Management</a>
@@ -221,11 +248,12 @@
 				<nav class="navbar navbar-inverse">
 				  <div class="container-fluid">
 				    <div class="navbar-header">
-				      <a class="navbar-brand" href="#">Create Teacher</a>
+				      <a class="navbar-brand" href="#">WebSiteName</a>
 				    </div>
 
 				    <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); logoutConfirmation();"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				      <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+				      <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); logoutConfirmation();"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 				    </ul>
 				  </div>
 				</nav>
@@ -233,38 +261,66 @@
     </div>
 
         <div class="top-bar">
-        <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-        <div class="container">
-                <h2>Add New Teacher</h2>
-                        <form action="{{ route('admin.teachers.store') }}" method="POST">
-                            @csrf
+
+                    <div class="container">
+                <h2>Manage Classrooms</h2>
+
+                                <div class="row">
+                    <div class="col-md-6">
+                        <form action="{{ route('admin.classrooms.index') }}" method="GET" class="form-inline">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" class="form-control" required>
+                                <input type="text" name="search" class="form-control" placeholder="Search...">
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input type="text" name="phone_number" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" name="address" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="qualification">Qualification</label>
-                                <input type="text" name="qualification" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-success">Save</button>
-                            <a href="{{ route('admin.teachers.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
+                            <button type="submit" class="btn btn-primary">Search</button>
                         </form>
                     </div>
+                    <div class="col-md-6 text-right">
+                        <a href="{{ route('admin.classrooms.create') }}" class="btn btn-success">Add Classroom</a>
+                    </div>
+                </div>
 
+
+                @if ($classrooms->isEmpty())
+                    <p>No classrooms found.</p>
+                @else
+                <table class="table" style="margin-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Teacher</th>
+                                <th>Major</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($classrooms as $classroom)
+                                <tr>
+                                    <td>{{ $classroom->id }}</td>
+                                    <td>{{ $classroom->name }}</td>
+                                    <td>{{ $classroom->teacher->name }}</td>
+                                    <td>{{ $classroom->major->name }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.classrooms.edit', $classroom->id) }}" class="btn btn-primary">Edit</a>
+                                        <form action="{{ route('admin.classrooms.destroy', $classroom->id) }}" method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this classroom?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                                            @if ($search)
+                            <p>Search results for: <strong>{{ $search }}</strong></p>
+                        @endif
+                    {{ $classrooms->links() }}
+                @endif
+            </div>
 
         </div>
 
