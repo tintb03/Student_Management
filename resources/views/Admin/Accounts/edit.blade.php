@@ -223,7 +223,7 @@
                                     <label for="email">Email</label>
                                     <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" name="password" class="form-control">
@@ -238,6 +238,7 @@
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update User</button>
+                                <a href="{{ route('admin.accounts.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
                             </form>
                         </div>
         </div>

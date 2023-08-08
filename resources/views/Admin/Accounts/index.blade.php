@@ -13,6 +13,35 @@
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
+
+        .table {
+        width: 100%;
+        border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
         ul {
             list-style-type: none;
             padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
@@ -121,7 +150,7 @@
             color: #fff;
             text-align: center;
             padding: 10px;
-            position: fixed;
+           
             bottom: 0;
             width: 100%;
         }
@@ -286,7 +315,7 @@
     </div>
 
     <footer>
-        <p style="margin-right: 240px;">© 2023 Your Website. All rights reserved.</p>
+            <p style="margin-left: 270px;">© 2023 Your Website. All rights reserved.</p>
     </footer>
 
 </body>

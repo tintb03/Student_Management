@@ -13,6 +13,8 @@
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
+
+        
         ul {
             list-style-type: none;
             padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
@@ -236,6 +238,7 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Add User</button>
+                        <a href="{{ route('admin.accounts.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
                     </form>
                 </div>
         </div>
