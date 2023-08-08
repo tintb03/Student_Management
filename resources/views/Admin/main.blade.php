@@ -147,30 +147,37 @@
         <menu class="menu">
             <p class="menu-name">Admin DashBoard</p>
                     <ul>
-                        <li><a href="{{ route('admin.accounts.index') }}">View Accounts</a></li>
-                        <li><a href="{{ route('admin.accounts.create') }}">Create Account</a></li>
-                    </ul>
+                                <li><a href="{{ route('admin.accounts.index') }}">View Accounts</a></li>
+                                <li><a href="{{ route('admin.accounts.create') }}">Create Account</a></li>
+                            </ul>
 
-            <p class="menu-name">Quản Lý Chuyên Ngành</p>
+                    <p class="menu-name">Quản Lý Chuyên Ngành</p>
+                            <ul>
+                                <li><a href="{{ route('admin.majors.index') }}">View Majors</a></li>
+                                <li><a href="{{ route('admin.majors.create') }}">Create Majors</a></li>
+                            </ul>
                     <ul>
-                        <li><a href="{{ route('admin.majors.index') }}">View Majors</a></li>
-                        <li><a href="{{ route('admin.majors.create') }}">Create Majors</a></li>
-                    </ul>
-            <ul>
 
-            <p class="menu-name">Quản Lý Giáo Viên</p>
+                    <p class="menu-name">Quản Lý Giáo Viên</p>
+                            <ul>
+                                <li><a href="{{ route('admin.teachers.index') }}">View Teacher</a></li>
+                                <li><a href="{{ route('admin.teachers.create') }}">Create Teacher</a></li>
+                            </ul>
                     <ul>
-                        <li><a href="{{ route('admin.teachers.index') }}">View Teacher</a></li>
-                        <li><a href="{{ route('admin.teachers.create') }}">Create Teacher</a></li>
-                    </ul>
-            <ul>
-                <li class="active">
+                    <p class="menu-name">Quản Lý Sinh Viên</p>
+                            <ul>
+                                <li><a href="{{ route('admin.students.index') }}">View Student</a></li>
+                                <li><a href="{{ route('admin.students.create') }}">Create Student</a></li>
+                            </ul>
+                    <ul>
+
+                <!-- <li class="active">
                     <p href="#">Teacher Account Management</a>
                     <ul>
                         <li><a href="#">Views Account</a></li>
                         <li><a href="#">Create Account</a></li>
                         <li><a href="#">Update Account</a></li>
-                        <!-- <li><a href="#"></a></li> -->
+
                     </ul>
                 </li>
 
@@ -180,10 +187,10 @@
                         <li><a href="#">Views Account</a></li>
                         <li><a href="#">Create Account</a></li>
                         <li><a href="#">Update Account</a></li>
-                        <!-- <li><a href="#"></a></li> -->
+
                     </ul>
                 </li>
-                <li><a href="#">Animation</a></li>
+                <li><a href="#">Animation</a></li> -->
 
             </ul>
 <!-- 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\MajorController;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\StudentController;
 
 Route::get('/', function () {
     return view('home');
@@ -74,6 +75,16 @@ Route::prefix('admin/teachers')->group(function () {
     Route::get('/{teacher}/edit', [TeacherController::class, 'edit'])->name('admin.teachers.edit');
     Route::put('/{teacher}', [TeacherController::class, 'update'])->name('admin.teachers.update');
     Route::delete('/{teacher}', [TeacherController::class, 'destroy'])->name('admin.teachers.destroy');
+});
+
+//các route cho quản lý sinh viên:
+Route::prefix('admin/students')->group(function () {
+    Route::get('/', [StudentController::class, 'index'])->name('admin.students.index');
+    Route::get('/create', [StudentController::class, 'create'])->name('admin.students.create');
+    Route::post('/', [StudentController::class, 'store'])->name('admin.students.store');
+    Route::get('/{student}/edit', [StudentController::class, 'edit'])->name('admin.students.edit');
+    Route::put('/{student}', [StudentController::class, 'update'])->name('admin.students.update');
+    Route::delete('/{student}', [StudentController::class, 'destroy'])->name('admin.students.destroy');
 });
 
 

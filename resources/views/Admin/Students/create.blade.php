@@ -13,31 +13,6 @@
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
-
-        .table th,
-        .table td {
-            padding: 8px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        .table th {
-            background-color: #f2f2f2;
-        }
-
-        .table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .table tr:hover {
-            background-color: #ddd;
-        }
-
-        .actions {
-            display: flex;
-            gap: 5px;
-        }
-
         ul {
             list-style-type: none;
             padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
@@ -146,6 +121,7 @@
             color: #fff;
             text-align: center;
             padding: 10px;
+            position: fixed;
             bottom: 0;
             width: 100%;
         }
@@ -239,7 +215,7 @@
 				<nav class="navbar navbar-inverse">
 				  <div class="container-fluid">
 				    <div class="navbar-header">
-				      <a class="navbar-brand" href="#">View Teachers</a>
+				      <a class="navbar-brand" href="#">Create Student</a>
 				    </div>
 
 				    <ul class="nav navbar-nav navbar-right">
@@ -251,73 +227,45 @@
 				  
     </div>
 
-    <div class="top-bar">
-    <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+        <div class="top-bar">
+        <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-            <div class="container">
-                <h2>Manage Teacher</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                    <form action="{{ route('admin.teachers.index') }}" method="GET" class="form-inline">
-                        <div class="form-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search by name or email" value="{{ request('search') }}">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </form>
-                </div>
-                <div class="col-md-6 text-right">
-                    <a href="{{ route('admin.teachers.create') }}" class="btn btn-success">Add Teacher</a>
-                </div>
+
+                    <div class="container">
+                <h2>Create Student</h2>
+                <form action="{{ route('admin.students.store') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number:</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" id="address" name="address" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <a href="{{ route('admin.students.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
+                </form>
             </div>
 
-            @if ($teachers->isEmpty())
-                <p>No teachers found.</p>
-            @else
-                <!-- Code to display the table of teachers -->
-            @endif
 
-            <div class="table-container">
-                    <table class="table" style="margin-top: 30px;">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Address</th>
-                            <th>Qualification</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($teachers as $teacher)
-                            <tr>
-                                <td>{{ $teacher->id }}</td>
-                                <td>{{ $teacher->name }}</td>
-                                <td>{{ $teacher->email }}</td>
-                                <td>{{ $teacher->phone_number }}</td>
-                                <td>{{ $teacher->address }}</td>
-                                <td>{{ $teacher->qualification }}</td>
-                                <td>
-                                    <a href="{{ route('admin.teachers.edit', $teacher->id) }}" class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('admin.teachers.destroy', $teacher->id) }}" method="POST" style="display: inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{ $teachers->links() }}
-            </div>
+
         </div>
-    </div>
+
+
 
     <footer>
-        <p>© 2023 Your Website. All rights reserved.</p>
+        <p style="margin-right: 240px;">© 2023 Your Website. All rights reserved.</p>
     </footer>
+
 </body>
 </html>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin DashBoard</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
- 	<style type="text/css">
+    <style type="text/css">
         /* CSS cho thanh sidebar */
         body {
             margin: 0;
@@ -40,15 +40,12 @@
 
         ul {
             list-style-type: none;
-            padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
-            padding-left: 0px;
- 
+            padding-left: 0;
         }
 
         li {
-            padding-left: 20px; /* Điều chỉnh giá trị theo mong muốn */
+            padding-left: 20px;
         }
-
 
         .sidebar {
             position: fixed;
@@ -66,7 +63,7 @@
         }
 
         .sidebar .top-bar .logo img {
-            width: 250px; /* Điều chỉnh kích thước theo ý muốn */
+            width: 250px;
             height: auto;
         }
 
@@ -86,11 +83,11 @@
         }
 
         /* Định dạng cho liên kết trong menu */
-        .menu{
+        .menu {
             padding-left: 20px;
         }
+
         .menu a {
-            
             text-decoration: none;
         }
 
@@ -102,15 +99,14 @@
 
         /* CSS cho phần nội dung chính */
         .main {
-
-            margin-left: 250px; /* Khoảng cách với sidebar */
+            margin-left: 250px;
         }
 
         .navbar {
             background: #FFFACD;
             color: #FFF;
             text-align: center;
-            margin: 0px;
+            margin: 0;
             height: 50px;
         }
 
@@ -126,20 +122,20 @@
             padding: 20px;
             border-radius: 5px;
             height: 780px;
-            
             /* background-image: url("https://btec.fpt.edu.vn/wp-content/uploads/2022/07/LogoBTEC-1536x1268.png");
             background-size: cover;
             background-repeat: no-repeat; */
         }
 
-                /* Đặt kích thước ảnh theo tỷ lệ */
+        /* Đặt kích thước ảnh theo tỷ lệ */
         img {
-            width: 50%; /* Điều chỉnh kích thước chiều rộng dựa trên tỷ lệ phần trăm */
-            height: auto; /* Tự điều chỉnh chiều cao để duy trì tỷ lệ */
+            width: 50%;
+            /* Điều chỉnh kích thước chiều rộng dựa trên tỷ lệ phần trăm */
+            height: auto;
+            /* Tự điều chỉnh chiều cao để duy trì tỷ lệ */
             display: block;
             margin: auto;
         }
-
 
         footer {
             background-color: #333;
@@ -149,8 +145,6 @@
             bottom: 0;
             width: 100%;
         }
-
-        
     </style>
 </head>
 <body>
@@ -164,7 +158,7 @@
         </div>
 
         <div class="search-box">
-            <input type="text" placeholder="Search..."/>
+            <input type="text" placeholder="Search..." />
             <p class="fa fa-search"></p>
         </div>
 
@@ -231,93 +225,89 @@
         </menu>
     </aside>
 
+    <div class="main">
+        <div class="navbar">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">View Students</a>
+                    </div>
 
-
-     <div class="main">
-
-     	   <div class="navbar">
-				<nav class="navbar navbar-inverse">
-				  <div class="container-fluid">
-				    <div class="navbar-header">
-				      <a class="navbar-brand" href="#">View Teachers</a>
-				    </div>
-
-				    <ul class="nav navbar-nav navbar-right">
-				      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-				    </ul>
-				  </div>
-				</nav>
-				  
-    </div>
-
-    <div class="top-bar">
-    <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
+
+        <div class="top-bar">
+            <h1>Welcome to Admin Dashboard !!!!!!!</h1>
+        </div>
+
         <div class="main-content">
             <div class="container">
-                <h2>Manage Teacher</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                    <form action="{{ route('admin.teachers.index') }}" method="GET" class="form-inline">
-                        <div class="form-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search by name or email" value="{{ request('search') }}">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </form>
-                </div>
-                <div class="col-md-6 text-right">
-                    <a href="{{ route('admin.teachers.create') }}" class="btn btn-success">Add Teacher</a>
-                </div>
-            </div>
+                <h2>Manage Students</h2>
 
-            @if ($teachers->isEmpty())
-                <p>No teachers found.</p>
-            @else
-                <!-- Code to display the table of teachers -->
-            @endif
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="{{ route('admin.students.index') }}" method="GET" class="form-inline">
+                            <div class="form-group">
+                                <input type="text" name="search" class="form-control" placeholder="Search...">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
 
-            <div class="table-container">
-                    <table class="table" style="margin-top: 30px;">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Address</th>
-                            <th>Qualification</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($teachers as $teacher)
+                    <div class="col-md-6 text-right">
+                        <a href="{{ route('admin.students.create') }}" class="btn btn-success">Add Student</a>
+                    </div>
+                </div>
+
+                @if ($students->isEmpty())
+                    <p>No students found.</p>
+                @else
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>{{ $teacher->id }}</td>
-                                <td>{{ $teacher->name }}</td>
-                                <td>{{ $teacher->email }}</td>
-                                <td>{{ $teacher->phone_number }}</td>
-                                <td>{{ $teacher->address }}</td>
-                                <td>{{ $teacher->qualification }}</td>
-                                <td>
-                                    <a href="{{ route('admin.teachers.edit', $teacher->id) }}" class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('admin.teachers.destroy', $teacher->id) }}" method="POST" style="display: inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
-                                    </form>
-                                </td>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <!-- Thêm các cột khác cần hiển thị -->
+                                <th>Actions</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{ $teachers->links() }}
+                        </thead>
+                        <tbody>
+                            @foreach ($students as $student)
+                                <tr>
+                                    <td>{{ $student->id }}</td>
+                                    <td>{{ $student->name }}</td>
+                                    <td>{{ $student->email }}</td>
+                                    <td>{{ $student->phone_number }}</td>
+                                    <td>{{ $student->address }}</td>
+                                    <!-- Thêm các cột khác cần hiển thị -->
+                                    <td>
+                                        <a href="{{ route('admin.students.edit', $student->id) }}" class="btn btn-primary">Edit</a>
+                                        <form action="{{ route('admin.students.destroy', $student->id) }}" method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{ $students->links() }}
+                @endif
             </div>
         </div>
-    </div>
 
-    <footer>
-        <p>© 2023 Your Website. All rights reserved.</p>
-    </footer>
+        <footer>
+            <p>© 2023 Your Website. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>
