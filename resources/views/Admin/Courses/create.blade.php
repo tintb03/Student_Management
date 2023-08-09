@@ -241,17 +241,41 @@
 				</nav>
 				  
     </div>
-
-        <div class="top-bar">
-            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
-        </div>
-        <div class="main-content">
-                    <a href="#">
-                        <img src="https://btec.fpt.edu.vn/wp-content/uploads/2022/07/LogoBTEC-1536x1268.png" alt="Logo">
-                    </a>
-        </div>
-
-
+                <div class="top-bar">
+                <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+            </div>
+            <div class="main-content">
+                <div class="container">
+                    <h2>Add Course</h2>
+                    <form action="{{ route('admin.courses.store') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">Course Name:</label>
+                            <input type="text" name="name" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="teacher_id">Teacher:</label>
+                            <select name="teacher_id" class="form-control">
+                                <option value="">Select Teacher</option>
+                                @foreach($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="major_id">Major:</label>
+                            <select name="major_id" class="form-control">
+                                <option value="">Select Major</option>
+                                @foreach($majors as $major)
+                                    <option value="{{ $major->id }}">{{ $major->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Add Course</button>
+                        <a href="{{ route('admin.courses.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
+                    </form>
+                </div>
+            </div>
 
     <footer>
         <p style="margin-right: 240px;">© 2023 Your Website. All rights reserved.</p>

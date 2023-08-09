@@ -246,9 +246,25 @@
             <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-                    <a href="#">
-                        <img src="https://btec.fpt.edu.vn/wp-content/uploads/2022/07/LogoBTEC-1536x1268.png" alt="Logo">
-                    </a>
+
+                <div class="container">
+                <h2>Add Students to Course: {{ $course->name }}</h2>
+                <p><strong>Teacher:</strong> {{ $course->teacher ? $course->teacher->name : 'N/A' }}</p>
+                    <p><strong>Major:</strong> {{ $course->major ? $course->major->name : 'N/A' }}</p>
+                <form action="{{ route('admin.courses.addStudentToCourse', $course->id) }}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label>Select Students:</label>
+                        <select name="student_ids[]" class="form-control" multiple>
+                            @foreach($students as $student)
+                                <option value="{{ $student->id }}">{{ $student->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Students</button>
+                    <a href="{{ route('admin.courses.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
+                </form>
+                </div>
         </div>
 
 

@@ -246,10 +246,43 @@
             <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-                    <a href="#">
-                        <img src="https://btec.fpt.edu.vn/wp-content/uploads/2022/07/LogoBTEC-1536x1268.png" alt="Logo">
-                    </a>
-        </div>
+
+
+
+
+                    <div class="container">
+                <h2>Edit Course</h2>
+                <form action="{{ route('admin.courses.update', $course->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name">Course Name:</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ $course->name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacher_id">Teacher:</label>
+                        <select name="teacher_id" id="teacher_id" class="form-control">
+                            @foreach($teachers as $teacher)
+                                <option value="{{ $teacher->id }}" {{ $course->teacher_id == $teacher->id ? 'selected' : '' }}>
+                                    {{ $teacher->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="major_id">Major:</label>
+                        <select name="major_id" id="major_id" class="form-control">
+                            @foreach($majors as $major)
+                                <option value="{{ $major->id }}" {{ $course->major_id == $major->id ? 'selected' : '' }}>
+                                    {{ $major->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Course</button>
+                    <a href="{{ route('admin.courses.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
+                </form>
+            </div>
 
 
 

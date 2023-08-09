@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MajorController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ClassroomController;
+use App\Http\Controllers\Admin\CourseController;
 
 Route::get('/', function () {
     return view('home');
@@ -107,6 +108,31 @@ Route::prefix('admin/classrooms')->group(function () {
     Route::delete('admin/classrooms/{classroom}/remove-student/{student}', [ClassroomController::class, 'removeStudent'])->name('admin.classrooms.remove-student');
 
 });
+
+
+Route::prefix('admin/courses')->group(function () {
+    Route::get('/', [CourseController::class, 'index'])->name('admin.courses.index');
+    Route::get('/create', [CourseController::class, 'create'])->name('admin.courses.create');
+    Route::post('/', [CourseController::class, 'store'])->name('admin.courses.store');
+    Route::get('/{course}', [CourseController::class, 'show'])->name('admin.courses.show');
+    Route::get('/{course}/edit', [CourseController::class, 'edit'])->name('admin.courses.edit');
+    Route::put('/{course}', [CourseController::class, 'update'])->name('admin.courses.update');
+    Route::delete('/{course}', [CourseController::class, 'destroy'])->name('admin.courses.destroy');
+    Route::get('/{course}/students', [CourseController::class, 'showStudents'])->name('admin.courses.students');
+
+    // Add new route for adding student to a course
+    Route::get('/{course}/add-student', [CourseController::class, 'showAddStudentForm'])->name('admin.courses.showAddStudentForm');
+    Route::post('/{course}/add-student', [CourseController::class, 'addStudentToCourse'])->name('admin.courses.addStudentToCourse');
+
+    Route::get('/create', [CourseController::class, 'create'])->name('admin.courses.create');
+    Route::post('/', [CourseController::class, 'store'])->name('admin.courses.store');
+
+    // ... other routes ...
+});
+
+
+
+
 
 
 

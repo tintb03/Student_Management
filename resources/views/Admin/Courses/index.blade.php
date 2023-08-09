@@ -246,9 +246,64 @@
             <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-                    <a href="#">
-                        <img src="https://btec.fpt.edu.vn/wp-content/uploads/2022/07/LogoBTEC-1536x1268.png" alt="Logo">
-                    </a>
+
+
+
+                    <div class="container">
+                <h2>Manage Courses</h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="{{ route('admin.courses.index') }}" method="GET" class="form-inline">
+                            <div class="form-group">
+                                <input type="text" name="search" class="form-control" placeholder="Search...">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="{{ route('admin.courses.create') }}" class="btn btn-success">Add Course</a>
+                    </div>
+                </div>
+                
+                @if ($courses->isEmpty())
+                    <p>No courses found.</p>
+                @else
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Teacher</th>
+                                <th>Major</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($courses as $course)
+                            <tr>
+                                <td>{{ $course->id }}</td>
+                                <td>{{ $course->name }}</td>
+                                <td>{{ $course->teacher ? $course->teacher->name : 'N/A' }}</td>
+                                <td>{{ $course->major ? $course->major->name : 'N/A' }}</td>
+
+                                <td>
+                                    <a href="{{ route('admin.courses.edit', $course->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{{ route('admin.courses.show', $course->id) }}" class="btn btn-info btn-sm">Details</a>
+                                    <a href="{{ route('admin.courses.students', $course->id) }}" class="btn btn-info btn-sm">View Students</a>
+                                    <form action="{{ route('admin.courses.destroy', $course->id) }}" method="post" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this course?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+
         </div>
 
 

@@ -246,10 +246,43 @@
             <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-                    <a href="#">
-                        <img src="https://btec.fpt.edu.vn/wp-content/uploads/2022/07/LogoBTEC-1536x1268.png" alt="Logo">
-                    </a>
-        </div>
+
+
+
+                <div class="container">
+                    <h2>Course Details</h2>
+                    <p><strong>ID:</strong> {{ $course->id }}</p>
+                    <p><strong>Name:</strong> {{ $course->name }}</p>
+                    <p><strong>Teacher:</strong> {{ $course->teacher ? $course->teacher->name : 'N/A' }}</p>
+                    <p><strong>Major:</strong> {{ $course->major ? $course->major->name : 'N/A' }}</p>
+
+
+                    <h2>Students Enrolled</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($course->students as $student)
+                            <tr>
+                                <td>{{ $student->id }}</td>
+                                <td>{{ $student->name }}</td>
+                                <td>{{ $student->email }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                        <div class="col-md-6 text-right">
+                            <a href="{{ route('admin.courses.showAddStudentForm', $course->id) }}" class="btn btn-success btn-sm">Add Student</a>
+                            <a href="{{ route('admin.courses.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
+                        </div>
+                </div>
+            </div>
 
 
 
