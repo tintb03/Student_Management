@@ -264,78 +264,53 @@
             <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-
                     <div class="container">
-                <h2>Manage Classrooms</h2>
-
-                                <div class="row">
-                    <div class="col-md-6">
-                        <form action="{{ route('admin.classrooms.index') }}" method="GET" class="form-inline">
-                            <div class="form-group">
-                                <input type="text" name="search" class="form-control" placeholder="Search...">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </form>
+                <h2>Students in {{ $classroom->name }}</h2>
+                <div class="row">
+                     <div class="col-md-6">
+                <form action="{{ route('admin.classrooms.students', ['classroom' => $classroom->id]) }}" method="GET" class="form-inline mb-3">
+                    <div class="form-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search...">
                     </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                </div>    
+
                     <div class="col-md-6 text-right">
-                        <a href="{{ route('admin.classrooms.create') }}" class="btn btn-success">Add Classroom</a>
+                        <a href="{{ route('admin.classrooms.add-student', ['classroom' => $classroom->id]) }}" class="btn btn-success mb-3">Add Student</a>
                     </div>
                 </div>
-
-
-                @if ($classrooms->isEmpty())
-                    <p>No classrooms found.</p>
-                @else
+                
                 <table class="table" style="margin-top: 30px;">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Teacher</th>
-                                <th>Major</th>
-                                <th>Actions</th>
-                                <th>Management</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($classrooms as $classroom)
-                                <tr>
-                                    <td>{{ $classroom->id }}</td>
-                                    <td>{{ $classroom->name }}</td>
-                                    <td>{{ $classroom->teacher->name }}</td>
-                                    <td>{{ $classroom->major->name }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.classrooms.edit', $classroom->id) }}" class="btn btn-primary">Edit</a>
-                                        <form action="{{ route('admin.classrooms.destroy', $classroom->id) }}" method="POST" style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this classroom?')">Delete</button>
-                                    <td>
-                                        <!-- Xem sinh viên của lớp học -->
-                                        <a href="{{ route('admin.classrooms.students', $classroom->id) }}" class="btn btn-info">View Students</a>
-                                        
-                                        <!-- Thêm sinh viên vào lớp học -->
-                                        <a href="{{ route('admin.classrooms.add-student', $classroom->id) }}" class="btn btn-primary">Add Student</a>
-                                        
-                                        <!-- Điểm danh sinh viên -->
-                                        <a href="{{ route('admin.classrooms.mark-attendance', $classroom->id) }}" class="btn btn-warning">Mark Attendance</a>
-                                    </td>
-                                        </form>
-                                    </td>
-  
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                                            @if ($search)
-                            <p>Search results for: <strong>{{ $search }}</strong></p>
-                        @endif
-                    {{ $classrooms->links() }}
-                @endif
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <!-- ... other columns ... -->
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($classroom->students as $student)
+                        <tr>
+                            <td>{{ $student->id }}</td>
+                            <td>{{ $student->name }}</td>
+                            <td>{{ $student->email }}</td>
+                            <!-- ... other columns ... -->
+                            <td>
+                                <form action="{{ route('admin.classrooms.remove-student', ['classroom' => $classroom->id, 'student' => $student->id]) }}" method="post" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to remove this student from the classroom?')">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-
-        </div>
-
+            </div>
 
 
     <footer>

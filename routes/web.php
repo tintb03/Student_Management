@@ -90,14 +90,22 @@ Route::prefix('admin/students')->group(function () {
 
 
 //các route cho quản lý lớp học:
-Route::prefix('admin')->group(function () {
-    Route::get('classrooms', [ClassroomController::class, 'index'])->name('admin.classrooms.index');
-    Route::get('admin/classrooms/create', [ClassroomController::class, 'create'])->name('admin.classrooms.create');
-    Route::post('classrooms', [ClassroomController::class, 'store'])->name('admin.classrooms.store');
-    Route::get('classrooms/{classroom}', [ClassroomController::class, 'show'])->name('admin.classrooms.show');
-    Route::get('classrooms/{classroom}/edit', [ClassroomController::class, 'edit'])->name('admin.classrooms.edit');
-    Route::put('classrooms/{classroom}', [ClassroomController::class, 'update'])->name('admin.classrooms.update');
-    Route::delete('classrooms/{classroom}', [ClassroomController::class, 'destroy'])->name('admin.classrooms.destroy');
+Route::prefix('admin/classrooms')->group(function () {
+    Route::get('/', [ClassroomController::class, 'index'])->name('admin.classrooms.index');
+    Route::get('/create', [ClassroomController::class, 'create'])->name('admin.classrooms.create');
+    Route::post('/', [ClassroomController::class, 'store'])->name('admin.classrooms.store');
+    Route::get('/{classroom}', [ClassroomController::class, 'show'])->name('admin.classrooms.show');
+    Route::get('/{classroom}/edit', [ClassroomController::class, 'edit'])->name('admin.classrooms.edit');
+    Route::put('/{classroom}', [ClassroomController::class, 'update'])->name('admin.classrooms.update');
+    Route::delete('/{classroom}', [ClassroomController::class, 'destroy'])->name('admin.classrooms.destroy');
+
+    Route::get('/{classroom}/students', [ClassroomController::class, 'show'])->name('admin.classrooms.students');
+    Route::get('/{classroom}/add-student', [ClassroomController::class, 'addStudent'])->name('admin.classrooms.add-student');
+    Route::post('/{classroom}/store-student', [ClassroomController::class, 'storeStudent'])->name('admin.classrooms.store-student');
+    Route::get('/{classroom}/mark-attendance', [ClassroomController::class, 'markAttendance'])->name('admin.classrooms.mark-attendance');
+    Route::post('/{classroom}/store-attendance', [ClassroomController::class, 'storeAttendance'])->name('admin.classrooms.store-attendance');
+    Route::delete('admin/classrooms/{classroom}/remove-student/{student}', [ClassroomController::class, 'removeStudent'])->name('admin.classrooms.remove-student');
+
 });
 
 

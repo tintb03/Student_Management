@@ -13,31 +13,6 @@
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
-
-        .table th,
-        .table td {
-            padding: 8px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        .table th {
-            background-color: #f2f2f2;
-        }
-
-        .table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .table tr:hover {
-            background-color: #ddd;
-        }
-
-        .actions {
-            display: flex;
-            gap: 5px;
-        }
-
         ul {
             list-style-type: none;
             padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
@@ -202,7 +177,6 @@
                                 <li><a href="{{ route('admin.classrooms.create') }}">Create ClassRoom</a></li>
                             </ul>
                     <ul>
-                        
 
                 <!-- <li class="active">
                     <p href="#">Teacher Account Management</a>
@@ -263,78 +237,26 @@
         <div class="top-bar">
             <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
-        <div class="main-content">
-
+                <div class="main-content">
                     <div class="container">
-                <h2>Manage Classrooms</h2>
 
-                                <div class="row">
-                    <div class="col-md-6">
-                        <form action="{{ route('admin.classrooms.index') }}" method="GET" class="form-inline">
-                            <div class="form-group">
-                                <input type="text" name="search" class="form-control" placeholder="Search...">
+                            @if(Session::has('success'))
+                            <div class="alert alert-success">
+                                {{ Session::get('success') }}
                             </div>
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </form>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="{{ route('admin.classrooms.create') }}" class="btn btn-success">Add Classroom</a>
-                    </div>
-                </div>
-
-
-                @if ($classrooms->isEmpty())
-                    <p>No classrooms found.</p>
-                @else
-                <table class="table" style="margin-top: 30px;">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Teacher</th>
-                                <th>Major</th>
-                                <th>Actions</th>
-                                <th>Management</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($classrooms as $classroom)
-                                <tr>
-                                    <td>{{ $classroom->id }}</td>
-                                    <td>{{ $classroom->name }}</td>
-                                    <td>{{ $classroom->teacher->name }}</td>
-                                    <td>{{ $classroom->major->name }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.classrooms.edit', $classroom->id) }}" class="btn btn-primary">Edit</a>
-                                        <form action="{{ route('admin.classrooms.destroy', $classroom->id) }}" method="POST" style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this classroom?')">Delete</button>
-                                    <td>
-                                        <!-- Xem sinh viên của lớp học -->
-                                        <a href="{{ route('admin.classrooms.students', $classroom->id) }}" class="btn btn-info">View Students</a>
-                                        
-                                        <!-- Thêm sinh viên vào lớp học -->
-                                        <a href="{{ route('admin.classrooms.add-student', $classroom->id) }}" class="btn btn-primary">Add Student</a>
-                                        
-                                        <!-- Điểm danh sinh viên -->
-                                        <a href="{{ route('admin.classrooms.mark-attendance', $classroom->id) }}" class="btn btn-warning">Mark Attendance</a>
-                                    </td>
-                                        </form>
-                                    </td>
-  
-                                </tr>
+                            @endif
+                        <h2>Add Student to {{ $classroom->name }}</h2>
+                    <form action="{{ route('admin.classrooms.store-student', $classroom->id) }}" method="post">
+                        @csrf
+                        <label for="student_id">Select Student:</label>
+                        <select name="student_id" id="student_id">
+                            @foreach($students as $student)
+                                <option value="{{ $student->id }}">{{ $student->name }}</option>
                             @endforeach
-                        </tbody>
-                    </table>
-                                            @if ($search)
-                            <p>Search results for: <strong>{{ $search }}</strong></p>
-                        @endif
-                    {{ $classrooms->links() }}
-                @endif
-            </div>
-
-        </div>
+                        </select>
+                        <button type="submit">Add Student</button>
+                    </form>
+                </div>
 
 
 
