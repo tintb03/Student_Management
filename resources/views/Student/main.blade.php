@@ -206,7 +206,7 @@
     </div>
 
         <div class="top-bar">
-            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+            <h1>Welcome to Student DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
   
