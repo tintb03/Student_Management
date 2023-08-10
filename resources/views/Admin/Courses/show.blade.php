@@ -13,6 +13,31 @@
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+
         ul {
             list-style-type: none;
             padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
@@ -146,7 +171,7 @@
 
         <menu class="menu">
             <p class="menu-name">Admin DashBoard</p>
-                    <ul>
+            <ul>
                                 <li><a href="{{ route('admin.accounts.index') }}">View Accounts</a></li>
                                 <li><a href="{{ route('admin.accounts.create') }}">Create Account</a></li>
                             </ul>
@@ -252,7 +277,7 @@
             <p><strong>Major:</strong> {{ $course->major ? $course->major->name : 'N/A' }}</p>
 
             <h2>Students Enrolled</h2>
-            <table class="table">
+            <table class="table" style="margin-top: 30px;">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -272,7 +297,7 @@
             </table>
 
             <h2>Class Schedule</h2>
-            <table class="table">
+                <table class="table" style="margin-top: 30px;">
                 <thead>
                     <tr>
                         <th>Room</th>

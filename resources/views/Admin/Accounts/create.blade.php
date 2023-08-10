@@ -148,7 +148,7 @@
 
         <menu class="menu">
             <p class="menu-name">Admin DashBoard</p>
-                    <ul>
+            <ul>
                                 <li><a href="{{ route('admin.accounts.index') }}">View Accounts</a></li>
                                 <li><a href="{{ route('admin.accounts.create') }}">Create Account</a></li>
                             </ul>
@@ -172,10 +172,19 @@
                                 <li><a href="{{ route('admin.students.create') }}">Create Student</a></li>
                             </ul>
                     <ul>
+
                     <p class="menu-name">Quản Lý Lớp Học</p>
                             <ul>
                                 <li><a href="{{ route('admin.classrooms.index') }}">View ClassRooms</a></li>
                                 <li><a href="{{ route('admin.classrooms.create') }}">Create ClassRoom</a></li>
+                            </ul>
+                    <ul>
+
+                    <p class="menu-name">Quản Lý Courses</p>
+                            <ul>
+                                <li><a href="{{ route('admin.courses.index') }}">View Courses</a></li>
+                                <li><a href="{{ route('admin.courses.create') }}">Create Courses</a></li>
+
                             </ul>
                     <ul>
 

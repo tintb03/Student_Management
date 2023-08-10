@@ -146,7 +146,7 @@
 
         <menu class="menu">
             <p class="menu-name">Admin DashBoard</p>
-                    <ul>
+            <ul>
                                 <li><a href="{{ route('admin.accounts.index') }}">View Accounts</a></li>
                                 <li><a href="{{ route('admin.accounts.create') }}">Create Account</a></li>
                             </ul>
@@ -185,7 +185,6 @@
 
                             </ul>
                     <ul>
-
                 <!-- <li class="active">
                     <p href="#">Teacher Account Management</a>
                     <ul>
