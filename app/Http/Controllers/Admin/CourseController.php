@@ -119,11 +119,12 @@ class CourseController extends Controller
     
         // Validate input here for the schedule
         $validatedData = $request->validate([
-            'day_of_week' => 'required|string',
+            'day_of_week' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'room_number' => 'required|string', // Add 'room_number' validation here
+            'room_number' => 'required|string',
         ]);
+        
     
         $course->schedules()->create($validatedData);
     
@@ -150,7 +151,7 @@ class CourseController extends Controller
     public function updateSchedule(Request $request, $courseId, $scheduleId)
     {
         $validatedData = $request->validate([
-            'day_of_week' => 'required|string',
+            'day_of_week' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
             'room_number' => 'required|string',

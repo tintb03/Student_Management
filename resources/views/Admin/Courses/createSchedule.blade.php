@@ -252,9 +252,10 @@
                 <form action="{{ route('admin.courses.storeSchedule', ['course' => $course->id]) }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="day_of_week">Day of Week:</label>
-                        <input type="text" class="form-control" id="day_of_week" name="day_of_week" required>
+                        <label for="day_of_week">Event Date:</label>
+                        <input type="date" class="form-control" id="day_of_week" name="day_of_week" value="{{ old('day_of_week') }}" required>
                     </div>
+
                     <div class="form-group">
                         <label for="room_number">Room Number:</label>
                         <input type="text" class="form-control" id="room_number" name="room_number" required>
