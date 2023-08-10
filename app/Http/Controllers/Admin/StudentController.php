@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
+use Illuminate\Support\Facades\View;
+use App\Models\Course;
+
 class StudentController extends Controller
 {
     public function index(Request $request)
@@ -66,6 +69,25 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->route('admin.students.index')->with('success', 'Student deleted successfully.');
     }
+
+
+
+
+    public function main()
+    {
+        $courses = Course::all(); // Lấy danh sách các khóa học
+        return view('students.main', compact('courses'));
+    }
+    
+    public function showCourse($id)
+    {
+        $course = Course::findOrFail($id); // Lấy thông tin chi tiết của một khóa học
+        return view('students.showCourse', compact('course'));
+    }
+
+    // Các hàm controller khác...
+
+
 
 
 }
