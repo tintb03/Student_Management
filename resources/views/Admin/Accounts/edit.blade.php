@@ -164,20 +164,14 @@
                                 <li><a href="{{ route('admin.teachers.create') }}">Create Teacher</a></li>
                             </ul>
                     <ul>
-                    <p class="menu-name">Quản Lý Sinh Viên</p>
-                            <ul>
-                                <li><a href="{{ route('admin.students.index') }}">View Student</a></li>
-                                <li><a href="{{ route('admin.students.create') }}">Create Student</a></li>
-                            </ul>
-                    <ul>
-
+                        
                     <p class="menu-name">Quản Lý Lớp Học</p>
                             <ul>
                                 <li><a href="{{ route('admin.classrooms.index') }}">View ClassRooms</a></li>
                                 <li><a href="{{ route('admin.classrooms.create') }}">Create ClassRoom</a></li>
                             </ul>
                     <ul>
-
+                    <hr/>
                     <p class="menu-name">Quản Lý Courses</p>
                             <ul>
                                 <li><a href="{{ route('admin.courses.index') }}">View Courses</a></li>
@@ -185,7 +179,12 @@
 
                             </ul>
                     <ul>
-
+                    <p class="menu-name">Quản Lý Sinh Viên</p>
+                            <ul>
+                                <li><a href="{{ route('admin.students.index') }}">View Student</a></li>
+                                <li><a href="{{ route('admin.students.create') }}">Create Student</a></li>
+                            </ul>
+                    <ul>
                 <!-- <li class="active">
                     <p href="#">Teacher Account Management</a>
                     <ul>
@@ -243,7 +242,7 @@
     </div>
 
         <div class="top-bar">
-            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+        <h1>Account Management</h1>
         </div>
         <div class="main-content">
         <div class="container">

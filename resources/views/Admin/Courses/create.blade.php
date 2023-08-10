@@ -133,7 +133,7 @@
     <aside class="sidebar">
         <div class="top-bar">
             <p class="logo">
-                <a href="{{ route('admin.main') }}">
+                <a href="#">
                     <img src="https://th.bing.com/th/id/OIP.OSutm8Wgkof3WBByI7TIdAHaCT?pid=ImgDet&rs=1" alt="Logo">
                 </a>
             </p>
@@ -145,38 +145,15 @@
         </div>
 
         <menu class="menu">
-            <p class="menu-name">Admin DashBoard</p>
-            <ul>
-                                <li><a href="{{ route('admin.accounts.index') }}">View Accounts</a></li>
-                                <li><a href="{{ route('admin.accounts.create') }}">Create Account</a></li>
-                            </ul>
 
-                    <p class="menu-name">Quản Lý Chuyên Ngành</p>
-                            <ul>
-                                <li><a href="{{ route('admin.majors.index') }}">View Majors</a></li>
-                                <li><a href="{{ route('admin.majors.create') }}">Create Majors</a></li>
-                            </ul>
-                    <ul>
-
-                    <p class="menu-name">Quản Lý Giáo Viên</p>
-                            <ul>
-                                <li><a href="{{ route('admin.teachers.index') }}">View Teacher</a></li>
-                                <li><a href="{{ route('admin.teachers.create') }}">Create Teacher</a></li>
-                            </ul>
-                    <ul>
-                    <p class="menu-name">Quản Lý Sinh Viên</p>
+            <p class="menu-name">Quản Lý Sinh Viên</p>
                             <ul>
                                 <li><a href="{{ route('admin.students.index') }}">View Student</a></li>
                                 <li><a href="{{ route('admin.students.create') }}">Create Student</a></li>
                             </ul>
                     <ul>
 
-                    <p class="menu-name">Quản Lý Lớp Học</p>
-                            <ul>
-                                <li><a href="{{ route('admin.classrooms.index') }}">View ClassRooms</a></li>
-                                <li><a href="{{ route('admin.classrooms.create') }}">Create ClassRoom</a></li>
-                            </ul>
-                    <ul>
+
 
                     <p class="menu-name">Quản Lý Courses</p>
                             <ul>
@@ -242,7 +219,7 @@
 				  
     </div>
                 <div class="top-bar">
-                <h1>Welcome to Admin DashBoard !!!!!!! </h1>
+                <h1>Course Management</h1>
             </div>
             <div class="main-content">
                 <div class="container">
