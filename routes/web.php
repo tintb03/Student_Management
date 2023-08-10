@@ -134,8 +134,6 @@ Route::prefix('admin/courses')->group(function () {
 //zzz
     Route::get('{course}/schedule/{schedule}', [CourseController::class, 'showSchedule'])->name('admin.courses.showSchedule');
 
-    Route::get('/student/main', [StudentController::class, 'main'])->name('student.main');
-
 
 
 

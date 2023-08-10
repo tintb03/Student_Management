@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
         // php artisan db:seed --class=AdminSeeder
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@example.com',
             'password' => Hash::make('123123123'),
             'role' => 'admin',
         ]);

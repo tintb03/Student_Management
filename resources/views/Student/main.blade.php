@@ -206,20 +206,10 @@
     </div>
 
         <div class="top-bar">
-            <h1>Welcome to Student DashBoard !!!!!!! </h1>
+            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-
-<div class="container">
-    <h2>My Courses</h2>
-    <ul>
-        @foreach ($courses as $course)
-            <li><a href="{{ route('student.showCourse', $course->id) }}">{{ $course->name }}</a></li>
-        @endforeach
-    </ul>
-</div>
-
-
+  
 
 
     <footer>
