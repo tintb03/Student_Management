@@ -124,12 +124,20 @@ Route::prefix('admin/courses')->group(function () {
     Route::get('/{course}/add-student', [CourseController::class, 'showAddStudentForm'])->name('admin.courses.showAddStudentForm');
     Route::post('/{course}/add-student', [CourseController::class, 'addStudentToCourse'])->name('admin.courses.addStudentToCourse');
 
-    Route::get('/create', [CourseController::class, 'create'])->name('admin.courses.create');
-    Route::post('/', [CourseController::class, 'store'])->name('admin.courses.store');
+    // Route cho thời khoá biểu
+    Route::get('{course}/schedule/create', [CourseController::class, 'createSchedule'])->name('admin.courses.createSchedule');
+    Route::post('{course}/schedule', [CourseController::class, 'storeSchedule'])->name('admin.courses.storeSchedule');
+    Route::get('{course}/schedule/{schedule}/edit', [CourseController::class, 'editSchedule'])->name('admin.courses.editSchedule');
+    Route::put('{course}/schedule/{schedule}', [CourseController::class, 'updateSchedule'])->name('admin.courses.updateSchedule');
+    Route::delete('{course}/schedule/{schedule}', [CourseController::class, 'destroySchedule'])->name('admin.courses.destroySchedule');
+    
+//zzz
+    Route::get('{course}/schedule/{schedule}', [CourseController::class, 'showSchedule'])->name('admin.courses.showSchedule');
+
+
 
     // ... other routes ...
 });
-
 
 
 

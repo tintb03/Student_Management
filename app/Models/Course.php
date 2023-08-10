@@ -29,4 +29,10 @@ class Course extends Model
         return $this->belongsTo(Major::class, 'major_id');
     }
 
+        public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
+
 }

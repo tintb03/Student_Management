@@ -224,105 +224,65 @@
 
 
 
-    <div class="main">
-    <div class="navbar">
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">WebSiteName</a>
-                </div>
+     <div class="main">
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); logoutConfirmation();"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                </ul>
-            </div>
-        </nav>
+     	   <div class="navbar">
+				<nav class="navbar navbar-inverse">
+				  <div class="container-fluid">
+				    <div class="navbar-header">
+				      <a class="navbar-brand" href="#">WebSiteName</a>
+				    </div>
+
+				    <ul class="nav navbar-nav navbar-right">
+				      <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+				      <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); logoutConfirmation();"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				    </ul>
+				  </div>
+				</nav>
+				  
     </div>
 
-    <div class="top-bar">
-        <h1>Welcome to Admin DashBoard !!!!!!! </h1>
-    </div>
-
-    <div class="main-content">
-        <div class="container">
-            <h2>Course Details</h2>
-            <p><strong>ID:</strong> {{ $course->id }}</p>
-            <p><strong>Name:</strong> {{ $course->name }}</p>
-            <p><strong>Teacher:</strong> {{ $course->teacher ? $course->teacher->name : 'N/A' }}</p>
-            <p><strong>Major:</strong> {{ $course->major ? $course->major->name : 'N/A' }}</p>
-
-            <h2>Students Enrolled</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($course->students as $student)
-                    <tr>
-                        <td>{{ $student->id }}</td>
-                        <td>{{ $student->name }}</td>
-                        <td>{{ $student->email }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <h2>Class Schedule</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Room</th>
-                        <th>Day</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($course->schedules as $schedule)
-                    <tr>
-                        <td>{{ $schedule->room_number }}</td>
-                        <td>{{ $schedule->day_of_week }}</td>
-                        <td>{{ $schedule->start_time }}</td>
-                        <td>{{ $schedule->end_time }}</td>
-                        <td>
-                            <a href="{{ route('admin.courses.editSchedule', ['course' => $course->id, 'schedule' => $schedule->id]) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="{{ route('admin.courses.destroySchedule', ['course' => $course->id, 'schedule' => $schedule->id]) }}" method="post" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this schedule?')">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <div class="row">
-                <div class="col-md-6 text-right">
-                    <a href="{{ route('admin.courses.showAddStudentForm', $course->id) }}" class="btn btn-success btn-sm">Add Student</a>
-                </div>
-                <div class="col-md-6 text-left">
-                    <a href="{{ route('admin.courses.createSchedule', ['course' => $course->id]) }}" class="btn btn-primary btn-sm">Add Schedule</a>
-                </div>
-            </div>
-
-            <div class="col-md-6 text-right">
-                <a href="{{ route('admin.courses.index') }}" class="btn btn-default">Back</a>
-            </div>
+        <div class="top-bar">
+            <h1>Welcome to Admin DashBoard !!!!!!! </h1>
         </div>
-    </div>
+        <div class="main-content">
+
+
+            <div class="container">
+                <h2>Edit Schedule</h2>
+                <form action="{{ route('admin.courses.updateSchedule', ['course' => $course->id, 'schedule' => $schedule->id]) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="day_of_week">Day of Week:</label>
+                        <input type="text" class="form-control" id="day_of_week" name="day_of_week" value="{{ $schedule->day_of_week }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="start_time">Start Time:</label>
+                        <input type="time" class="form-control" id="start_time" name="start_time" value="{{ $schedule->start_time }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="end_time">End Time:</label>
+                        <input type="time" class="form-control" id="end_time" name="end_time" value="{{ $schedule->end_time }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="room_number">Room Number:</label>
+                        <input type="text" class="form-control" id="room_number" name="room_number" value="{{ $schedule->room_number }}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Schedule</button>
+                    <a href="{{ route('admin.courses.index') }}" class="btn btn-default">Back</a> <!-- Nút Back -->
+                </form>
+            </div>
+
+
+
+        </div>
+
+
 
     <footer>
         <p style="margin-right: 240px;">© 2023 Your Website. All rights reserved.</p>
     </footer>
-</div>
-
-
 
     <script>
     function logoutConfirmation() {

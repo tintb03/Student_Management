@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Major;
+use App\Models\Schedule;
 
 class CourseController extends Controller
 {
@@ -103,6 +104,76 @@ class CourseController extends Controller
         $course->students()->syncWithoutDetaching($studentIds);
         return redirect()->route('admin.courses.students', $course->id)->with('success', 'Students added successfully.');
     }
+
+
+
+     public function createSchedule($id)
+    {
+        $course = Course::findOrFail($id);
+        return view('admin.courses.createSchedule', compact('course'));
+    }
+    
+    public function storeSchedule(Request $request, $id)
+    {
+        $course = Course::findOrFail($id);
+    
+        // Validate input here for the schedule
+        $validatedData = $request->validate([
+            'day_of_week' => 'required|string',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+            'room_number' => 'required|string', // Add 'room_number' validation here
+        ]);
+    
+        $course->schedules()->create($validatedData);
+    
+        return redirect()->route('admin.courses.show', $course->id)->with('success', 'Schedule created successfully.');
+    }
+    
+    ///zzz
+    public function showSchedule($courseId, $scheduleId)
+    {
+        $course = Course::findOrFail($courseId);
+        $schedule = Schedule::findOrFail($scheduleId);
+        return view('admin.courses.showSchedule', compact('course', 'schedule'));
+    }
+
+
+    ///zzz
+    public function editSchedule($courseId, $scheduleId)
+    {
+        $course = Course::findOrFail($courseId);
+        $schedule = Schedule::findOrFail($scheduleId);
+        return view('admin.courses.editSchedule', compact('course', 'schedule'));
+    }
+
+    public function updateSchedule(Request $request, $courseId, $scheduleId)
+    {
+        $validatedData = $request->validate([
+            'day_of_week' => 'required|string',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+            'room_number' => 'required|string',
+        ]);
+
+        $schedule = Schedule::findOrFail($scheduleId);
+        $schedule->update($validatedData);
+
+        return redirect()->route('admin.courses.showSchedule', ['course' => $courseId, 'schedule' => $scheduleId])->with('success', 'Schedule updated successfully.');
+    }
+
+    
+    
+    
+    public function destroySchedule($courseId, $scheduleId)
+    {
+        $course = Course::findOrFail($courseId);
+        $schedule = Schedule::findOrFail($scheduleId);
+        $schedule->delete();
+        return redirect()->route('admin.courses.show', $course->id)->with('success', 'Schedule deleted successfully.');
+    }
+
+    
     
 
     // ... other methods ...
