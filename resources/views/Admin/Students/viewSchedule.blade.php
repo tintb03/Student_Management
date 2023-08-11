@@ -13,6 +13,31 @@
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+        
         ul {
             list-style-type: none;
             padding-left: 1px; /* Điều chỉnh giá trị theo mong muốn */
@@ -215,33 +240,34 @@
             <h1>Welcome to Student DashBoard !!!!!!! </h1>
         </div>
         <div class="main-content">
-  
-
-            <div class="container">
-                <h2>Edit Profile</h2>
-                <form action="{{ route('admin.students.updateProfile') }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $student->name }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ $student->email }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone_number">Phone Number:</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $student->phone_number }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Address:</label>
-                        <input type="text" class="form-control" id="address" name="address" value="{{ $student->address }}" required>
-                    </div>
-                    <!-- Các trường thông tin khác -->
-                    <button type="submit" class="btn btn-primary">Update Profile</button>
-                </form>
-            </div>
+  <div class="container">
+    <h2>View Schedule</h2>
+    
+    <!-- Hiển thị thời khóa biểu cho student tại đây -->
+    <!-- Ví dụ: -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Course</th>
+                <th>Room Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($schedules as $schedule)
+            <tr>
+                <td>{{ $schedule->day_of_week }}</td>
+                <td>{{ $schedule->start_time }}</td>
+                <td>{{ $schedule->end_time }}</td>
+                <td>{{ $schedule->course->name }}</td>
+                <td>{{ $schedule->room_number }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 
 

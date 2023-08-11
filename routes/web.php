@@ -140,6 +140,9 @@ Route::prefix('admin/courses')->group(function () {
     Route::put('/admin/student/update-profile', [StudentController::class, 'updateProfile'])->name('admin.students.updateProfile');
     
 
+
+    Route::get('/admin/student/schedule', [StudentController::class, 'viewSchedule'])->name('admin.students.viewSchedule');
+
     // ... other routes ...
 });
 

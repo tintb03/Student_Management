@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Schedule;
 use Illuminate\Support\Facades\Auth;
-
 class StudentController extends Controller
 {
     public function index(Request $request)
@@ -94,6 +94,13 @@ class StudentController extends Controller
         $student->update($validatedData);
 
         return redirect()->route('student.main')->with('success', 'Profile updated successfully.');
+    }
+
+
+    public function viewSchedule()
+    {
+        $schedules = Schedule::all();
+        return view('admin.students.viewSchedule', compact('schedules'));
     }
 
 

@@ -149,12 +149,9 @@
 
                     <ul>
                     <a href="{{ route('admin.students.editProfile') }}" class="btn btn-primary">Edit Profile</a>
-
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-
+                    <a href="{{ route('admin.students.viewSchedule') }}" class="btn btn-primary">View Schedule</a>
                     </ul>
-                </li>
+
 
    
 
