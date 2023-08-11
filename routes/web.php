@@ -136,7 +136,9 @@ Route::prefix('admin/courses')->group(function () {
 
 
 
-
+    Route::get('/admin/student/edit-profile', [StudentController::class, 'editProfile'])->name('admin.students.editProfile');
+    Route::put('/admin/student/update-profile', [StudentController::class, 'updateProfile'])->name('admin.students.updateProfile');
+    
 
     // ... other routes ...
 });

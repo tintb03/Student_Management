@@ -147,6 +147,8 @@
         <menu class="menu">
             <p class="menu-name">Student DashBoard</p>
 
+            <li class="active">
+                    <p href="#">Profile</a>
                     <ul>
                     <a href="{{ route('admin.students.editProfile') }}" class="btn btn-primary">Edit Profile</a>
 
@@ -219,6 +221,33 @@
         </div>
         <div class="main-content">
   
+
+            <div class="container">
+                <h2>Edit Profile</h2>
+                <form action="{{ route('admin.students.updateProfile') }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $student->name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $student->email }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number:</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $student->phone_number }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" id="address" name="address" value="{{ $student->address }}" required>
+                    </div>
+                    <!-- Các trường thông tin khác -->
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                </form>
+            </div>
+
 
 
     <footer>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -65,6 +66,34 @@ class StudentController extends Controller
         $student = Student::findOrFail($id);
         $student->delete();
         return redirect()->route('admin.students.index')->with('success', 'Student deleted successfully.');
+    }
+
+
+
+
+
+
+    public function editProfile()
+    {
+        $student = Auth::user();
+        return view('admin.students.editProfile', compact('student'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $student = Auth::user();
+
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:students,email,' . $student->id,
+            'phone_number' => 'required',
+            'address' => 'required',
+            // Add validation rules for other fields as needed
+        ]);
+
+        $student->update($validatedData);
+
+        return redirect()->route('student.main')->with('success', 'Profile updated successfully.');
     }
 
 
