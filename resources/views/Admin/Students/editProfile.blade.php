@@ -147,13 +147,9 @@
         <menu class="menu">
             <p class="menu-name">Student DashBoard</p>
 
-            <li class="active">
-                    <p href="#">Profile</a>
-                    <ul>
+
                     <a href="{{ route('admin.students.editProfile') }}" class="btn btn-primary">Edit Profile</a>
 
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
 
                     </ul>
                 </li>
